@@ -26,11 +26,15 @@ import { NoteCard } from '../ui'
             [note]="note"
           >
           </note-card>
+          <note-card></note-card>
         </div>
       </div>
     </div>
   `
 })
 export class Notes{
-  note = { title: 'new note', value: 'note here'}
+  notes = [
+    { title: 'new note', value: 'note here', color: '#F00FF0'},
+    { title: 'new note', value: 'note here', color: '#F00FF0'}
+  ]
 }
