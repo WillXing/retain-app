@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Notes } from './notes';
-import { AppBar } from '../ui/index';
+import { AppBar } from '../ui';
 
 @Component({
   selector: 'main-container',

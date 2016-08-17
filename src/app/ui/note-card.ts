@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core'
+import {Component, Input, Output, EventEmitter} from '@angular/core'
 
 @Component({
   selector: 'note-card',
@@ -43,18 +43,19 @@ import {Component, Input} from '@angular/core'
       <div class="icon" *ngIf="showCheck" (click)="onChecked()">
         <i class="material-icons">check</i>
       </div>
-      <div class="col-xs-12 title">
+      <div class="col-xs-12 title" (click)="outPutTest()">
         {{ note.title }}
       </div>
-      <div class="col-xs-12 value">
+      <div class="col-xs-12 value" (click)="changeTest()">
         {{ note.value }}
       </div>
     </div>
   `
 })
 export class NoteCard{
-  @Input() note = {  }
-  
+  @Input() note = {}
+  @Input() testText = ""
+  @Output() checked = new EventEmitter()
   showCheck: boolean = false;
 
   toggle() {
@@ -62,7 +63,6 @@ export class NoteCard{
   }
 
   onChecked() {
-    console.log('click')
+    this.checked.emit(this.note)
   }
-
 }
