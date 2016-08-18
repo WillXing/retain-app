@@ -54,8 +54,8 @@ import {Component, Input, Output, EventEmitter} from '@angular/core'
 })
 export class NoteCard{
   @Input() note = {}
-  @Input() testText = ""
   @Output() checked = new EventEmitter()
+
   showCheck: boolean = false;
 
   toggle() {

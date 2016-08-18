@@ -31,7 +31,6 @@ import { NoteCard, NoteCreator } from '../ui'
             *ngFor = "let note of notes; let i = index"
           >
           </note-card>
-          <note-card></note-card>
         </div>
       </div>
     </div>
