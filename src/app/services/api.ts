@@ -1,6 +1,6 @@
 import {Http, Headers, Response} from '@angular/http'
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
+import {Observable, Observer} from "rxjs";
 
 @Injectable()
 export class ApiService {
@@ -28,11 +28,23 @@ export class ApiService {
   }
 
   get(path: string) {
-    return this.http.get(`${this.api_url}{path}`, {headers: this.headers})
+    return this.http.get(`${this.api_url}${path}`, {headers: this.headers})
       .map(this.checkForError)
-      .catch( err => {
-        Observable.throw(err);
-      })
+      .catch( err => Observable.throw(err))
+      .map(this.getJson)
+  }
+
+  post(path: string, note) {
+    return this.http.post(`${this.api_url}${path}`, note, {headers: this.headers})
+      .map(this.checkForError)
+      .catch( err => Observable.throw(err))
+      .map(this.getJson)
+  }
+
+  delete(path: string) {
+    return this.http.delete(`${this.api_url}${path}`, {headers: this.headers})
+      .map(this.checkForError)
+      .catch( err => Observable.throw(err))
       .map(this.getJson)
   }
 }

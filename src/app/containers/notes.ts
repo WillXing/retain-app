@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { NoteCard, NoteCreator } from '../ui'
+import {NoteService} from "../services/notes"
 
 @Component({
   selector: 'notes-container',
@@ -43,11 +44,17 @@ export class Notes{
     { title: 'new note', value: 'note here', color: '#F00FF0'}
   ]
 
+  constructor(private noteService: NoteService) {
+    this.noteService.getNotes()
+      .subscribe(res => this.notes = res.data)
+  }
+
   onNoteChecked(note, i) {
     this.notes.splice(i, 1)
   }
 
   onNoteCreate(note) {
-    this.notes.push(note)
+    this.noteService.createNote(note)
+      .subscribe( note => this.notes.push(note) )
   }
 }
