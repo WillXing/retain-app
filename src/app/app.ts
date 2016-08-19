@@ -1,14 +1,16 @@
 import { Component } from '@angular/core'
 import { Main } from './containers'
+import {ROUTER_DIRECTIVES} from "@angular/router";
 
 @Component({
   selector: 'app',
   directives: [
-    Main
+    Main,
+    ...ROUTER_DIRECTIVES
   ],
   template: `
     <div>
-      <main-container></main-container>
+      <router-outlet></router-outlet>
     </div>
   `
 })
