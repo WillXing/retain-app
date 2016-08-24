@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { NoteCard, NoteCreator } from '../ui'
 import {NoteService} from "../services/notes"
+import {Store} from "../store";
 
 @Component({
   selector: 'notes-container',
@@ -38,23 +39,26 @@ import {NoteService} from "../services/notes"
   `
 })
 export class Notes{
-  notes = [
-    { title: 'new note', value: 'note here', color: '#F00FF0'},
-    { title: 'new note', value: 'note here', color: '#F00FF0'},
-    { title: 'new note', value: 'note here', color: '#F00FF0'}
-  ]
+  notes = []
 
-  constructor(private noteService: NoteService) {
+  constructor(
+    private noteService: NoteService,
+    private store: Store
+  ) {
+    this.store.changes.pluck('notes')
+      .subscribe( (notes: any) => this.notes = notes)
+
     this.noteService.getNotes()
-      .subscribe(res => this.notes = res.data)
+      .subscribe()
   }
 
-  onNoteChecked(note, i) {
-    this.notes.splice(i, 1)
+  onNoteChecked(note) {
+    this.noteService.completeNote(note)
+      .subscribe()
   }
 
   onNoteCreate(note) {
     this.noteService.createNote(note)
-      .subscribe( note => this.notes.push(note) )
+      .subscribe()
   }
 }
